@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="蔣萬安、沈伯洋各五題政見問答，你了解兩位台北市長候選人的政見嗎？">
+<meta property="og:title" content="台北市長政見大考驗">
+<meta property="og:description" content="蔣萬安、沈伯洋各五題政見問答。你答得出幾題？11/28 投票前測一下。">
+<meta property="og:type" content="website">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);box-sizing:border-box}body{margin:0;font-size:14px}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>台北市長政見大考驗</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@700;900&family=Noto+Sans+TC:wght@400;500;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: a single ballot-paper card. Candidate figure + speech bubble on top, three answer rows below; choosing stamps a red 圈選 seal like a real Taiwanese ballot. */
+:root{
+  --bg:#eceee9; --paper:#fbfbf7; --ink:#1d2430; --mute:#5f6772; --rule:#d5d8d2;
+  --stamp:#d2352b; --ok:#1f8a5a; --no:#c2412f;
+  --blue:#2457b5; --green:#1d8a4e;
+  --f-display:"Noto Serif TC","Songti TC",serif;
+  --f-body:"Noto Sans TC",system-ui,sans-serif;
+  --f-num:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#12161b;--paper:#1b2027;--ink:#e8ebee;--mute:#9aa3ad;--rule:#2f3640;--stamp:#ff5a4c;--ok:#4fc58b;--no:#ff7a66;--blue:#6f9cf0;--green:#4fc07f;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#12161b;--paper:#1b2027;--ink:#e8ebee;--mute:#9aa3ad;--rule:#2f3640;--stamp:#ff5a4c;--ok:#4fc58b;--no:#ff7a66;--blue:#6f9cf0;--green:#4fc07f;color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body)}
+.wrap{max-width:520px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 32px;display:grid;gap:14px}
+.top{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.top h1{font:900 20px/1.2 var(--f-display);margin:0;letter-spacing:.04em}
+.top .meta{font:500 13px var(--f-num);color:var(--mute);white-space:nowrap}
+.progress{display:grid;grid-template-columns:repeat(10,1fr);gap:4px}
+.progress i{height:5px;border-radius:3px;background:var(--rule)}
+.progress i.ok{background:var(--ok)} .progress i.no{background:var(--no)} .progress i.cur{background:var(--ink)}
+
+.ballot{background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:18px;display:grid;gap:16px;position:relative;
+  box-shadow:0 1px 0 var(--rule),0 12px 30px -18px #0004}
+.ballot::before{content:"";position:absolute;inset:6px;border:1px dashed var(--rule);border-radius:3px;pointer-events:none}
+.speaker{display:grid;grid-template-columns:96px 1fr;gap:12px;align-items:end;position:relative}
+.fig{width:96px;height:120px;max-width:100%}
+.fig svg{width:100%;height:100%;display:block;transform-origin:50% 100%;animation:bob 2.4s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-3px) rotate(1.5deg)}}
+.fig.cheer svg{animation:cheer .5s ease-out}
+@keyframes cheer{30%{transform:translateY(-14px) scale(1.05)}60%{transform:translateY(0)}}
+.fig.sigh svg{animation:sigh .6s ease-out}
+@keyframes sigh{30%{transform:rotate(-6deg)}70%{transform:rotate(4deg)}}
+.say{position:relative;background:var(--bg);border-radius:14px;padding:10px 12px;margin-bottom:34px;min-width:0}
+.say::after{content:"";position:absolute;left:-7px;bottom:14px;border:7px solid transparent;border-right-color:var(--bg);border-left:0}
+.say .who{font:700 12px var(--f-body);letter-spacing:.06em;display:flex;gap:6px;align-items:center}
+.say .who .dot{width:8px;height:8px;border-radius:50%}
+.say p{margin:4px 0 0;font-size:14px;line-height:1.5;color:var(--mute)}
+.q{font:900 21px/1.45 var(--f-display);margin:0;text-wrap:balance}
+.opts{display:grid;gap:8px}
+.opt{display:grid;grid-template-columns:44px 1fr 52px;align-items:center;gap:0;border:1.5px solid var(--ink);border-radius:4px;background:transparent;
+  color:var(--ink);font:500 16px/1.4 var(--f-body);padding:0;cursor:pointer;text-align:left;min-height:56px;transition:background .15s}
+.opt .k{font:700 18px var(--f-display);align-self:stretch;display:grid;place-items:center;border-right:1.5px solid var(--ink)}
+.opt .t{padding:10px 12px;min-width:0}
+.opt .box{align-self:stretch;border-left:1.5px dashed var(--ink);position:relative}
+.opt:hover:not(:disabled){background:var(--bg)}
+.opt:focus-visible{outline:3px solid var(--stamp);outline-offset:2px}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--ok)} .opt.right .k{border-color:var(--ok);color:var(--ok)}
+.opt.wrong{opacity:.75}
+.seal{position:absolute;left:50%;top:50%;width:38px;height:38px;margin:-19px 0 0 -19px;border:3px solid var(--stamp);border-radius:50%;
+  display:grid;place-items:center;color:var(--stamp);font:900 17px var(--f-display);transform:rotate(-12deg);animation:stamp .22s cubic-bezier(.2,1.6,.5,1)}
+@keyframes stamp{from{transform:scale(2.2) rotate(-30deg);opacity:0}}
+.mark{position:absolute;right:-6px;top:-8px;font:900 15px var(--f-display);color:var(--paper);border-radius:3px;padding:1px 6px}
+.opt.right .mark{background:var(--ok)}
+
+.explain{border-top:1px solid var(--rule);padding-top:12px;display:grid;gap:6px}
+.explain b{font:900 17px var(--f-display)}
+.explain b.ok{color:var(--ok)} .explain b.no{color:var(--no)}
+.explain p{margin:0;font-size:14px;line-height:1.65}
+.explain small{color:var(--mute);font-size:12px}
+.btn{font:700 17px var(--f-body);border:0;border-radius:4px;padding:14px;background:var(--ink);color:var(--paper);cursor:pointer;touch-action:manipulation}
+.btn:focus-visible{outline:3px solid var(--stamp);outline-offset:2px}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+
+/* intro & result */
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.duo .c{display:grid;justify-items:center;gap:6px;text-align:center}
+.duo .c .fig{width:110px;height:138px}
+.duo .c b{font:900 18px var(--f-display)}
+.duo .c small{color:var(--mute);font-size:12px}
+.vs{font:900 13px var(--f-display);color:var(--stamp);letter-spacing:.2em;text-align:center}
+.hero{font:900 30px/1.3 var(--f-display);margin:0;text-wrap:balance}
+.lead{margin:0;color:var(--mute);font-size:15px;line-height:1.65}
+.score{font:900 64px/1 var(--f-display);margin:0;font-variant-numeric:tabular-nums}
+.score span{font-size:24px;color:var(--mute)}
+.split{display:grid;gap:10px}
+.split .r{display:grid;grid-template-columns:72px 1fr 40px;align-items:center;gap:10px;font-size:14px}
+.split .bar{height:10px;border-radius:5px;background:var(--rule);overflow:hidden}
+.split .bar i{display:block;height:100%}
+.split .n{font:500 14px var(--f-num);text-align:right}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.note{font-size:12px;color:var(--mute);line-height:1.6;margin:0}
+.src{font-size:12px;color:var(--mute);line-height:1.7;margin:0;padding-left:18px}
+.src a{color:var(--mute)}
+#shareText{-webkit-user-select:text;user-select:text;white-space:pre-line}
+.mute{position:fixed;right:calc(12px + env(safe-area-inset-right,0px));bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:30;width:44px;height:44px;border-radius:50%;
+  border:1.5px solid var(--ink);background:var(--paper);color:var(--ink);display:grid;place-items:center;cursor:pointer;padding:0;box-shadow:0 4px 14px #0003}
+.mute svg{width:20px;height:20px}
+.mute:focus-visible{outline:3px solid var(--stamp);outline-offset:2px}
+.fxl{position:fixed;inset:0;pointer-events:none;z-index:25;overflow:hidden}
+.cf{position:absolute;top:-12px;width:8px;height:12px;border-radius:2px;animation:fall var(--d) cubic-bezier(.25,.6,.5,1) forwards}
+@keyframes fall{to{transform:translate(var(--x),105vh) rotate(var(--r))}}
+.ink{position:absolute;width:6px;height:6px;border-radius:50%;background:var(--stamp);animation:ink .45s ease-out forwards}
+@keyframes ink{to{transform:translate(var(--dx),var(--dy)) scale(.3);opacity:0}}
+.ballot.shake{animation:bshake .35s}
+@keyframes bshake{20%{transform:translateX(-7px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(2px)}}
+.ballot.glow{animation:bglow .7s}
+@keyframes bglow{30%{box-shadow:0 0 0 4px var(--ok),0 12px 30px -18px #0004}}
+.q .cur{display:inline-block;width:2px;height:1em;background:var(--ink);vertical-align:-.12em;margin-left:2px;animation:blink .6s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.opts .opt{animation:slidein .32s cubic-bezier(.2,1.3,.5,1) backwards}
+.opts .opt:nth-child(2){animation-delay:.07s}.opts .opt:nth-child(3){animation-delay:.14s}
+@keyframes slidein{from{transform:translateX(24px);opacity:0}}
+.streak{position:absolute;right:14px;top:-14px;background:var(--stamp);color:#fff;font:900 14px var(--f-display);padding:4px 10px;border-radius:999px;animation:pop .5s cubic-bezier(.2,1.6,.5,1);z-index:3}
+@keyframes pop{from{transform:scale(0) rotate(-20deg)}}
+.duo .c .fig.walk{animation:walkin .6s cubic-bezier(.2,1.3,.5,1) backwards}
+.duo .c:nth-child(2) .fig.walk{animation-delay:.12s}
+@keyframes walkin{from{transform:translateY(40px) scale(.6);opacity:0}}
+.title-pop{animation:tpop .6s cubic-bezier(.2,1.6,.5,1) .2s backwards}
+@keyframes tpop{from{transform:scale(.4);opacity:0}}
+/* idle life: blink, wave, head tilt */
+.fig .eyes{transform-box:fill-box;transform-origin:center;animation:blink 3.8s infinite}
+.duo .c:nth-child(2) .fig .eyes{animation-delay:1.6s}
+@keyframes blink{0%,93%,100%{transform:scaleY(1)}96%{transform:scaleY(.08)}}
+.fig .arm{transform-box:view-box;transform-origin:84px 124px;animation:wave 1.1s ease-in-out infinite}
+.duo .c:nth-child(2) .fig .arm{animation-delay:-.55s}
+@keyframes wave{0%,100%{transform:rotate(6deg)}50%{transform:rotate(-22deg)}}
+.fig .head{transform-box:view-box;transform-origin:60px 100px;animation:tilt 2.6s ease-in-out infinite}
+.duo .c:nth-child(2) .fig .head{animation-delay:-1.3s}
+@keyframes tilt{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(4deg)}}
+.fig.intro svg{animation:hop 1.6s cubic-bezier(.3,0,.4,1) infinite}
+.duo .c:nth-child(2) .fig.intro svg{animation-delay:.8s}
+@keyframes hop{0%,40%,100%{transform:translateY(0) scale(1,1)}10%{transform:translateY(0) scale(1.06,.92)}22%{transform:translateY(-16px) scale(.96,1.05)}34%{transform:translateY(0) scale(1.05,.94)}}
+.duo .c{position:relative}
+.hi{position:relative;background:var(--ink);color:var(--paper);font:700 13px var(--f-body);padding:5px 10px;border-radius:12px;white-space:nowrap;
+  animation:hi 3.2s ease-in-out infinite;transform-origin:50% 100%}
+.hi::after{content:"";position:absolute;left:50%;top:100%;margin-left:-5px;border:5px solid transparent;border-top-color:var(--ink)}
+.duo .c:nth-child(2) .hi{animation-delay:1.6s}
+@keyframes hi{0%,8%{transform:scale(0);opacity:0}14%,44%{transform:scale(1);opacity:1}50%,100%{transform:scale(0);opacity:0}}
+@media (prefers-reduced-motion:reduce){.fig .eyes,.fig .arm,.fig .head,.fig.intro svg{animation:none!important}.hi{animation:none!important;opacity:1}}
+@media (prefers-reduced-motion:reduce){.fig svg,.seal,.cf,.ink,.ballot,.opts .opt,.title-pop,.duo .c .fig{animation:none!important}}
+</style>
+</head>
+<body>
+
+<div class="wrap" id="app"></div>
+
+<script>
+(()=>{
+/* ---------- candidates: same chibi proportions, each with his own recognizable features ---------- */
+const C={
+ chiang:{name:'蔣萬安',party:'中國國民黨',role:'現任市長',color:'var(--blue)',tie:'#2457b5'},
+ shen:{name:'沈伯洋',party:'民主進步黨',role:'立法委員',color:'var(--green)',tie:'#1d8a4e'}
+};
+function chibi(id,mood='smile'){
+  const c=C[id],skin='#f5cfae',skinS='#e6b48f',hair='#18130f',suit=id==='chiang'?'#1f2a44':'#2a2f36';
+  const happy=mood==='happy',sad=mood==='sad';
+  let head,hair1,hair2,brows,eyes,mouth,extra='',neck=`<rect x="52" y="94" width="16" height="14" fill="${skinS}"/>`;
+  if(id==='chiang'){
+    /* 方下巴、高聳後梳油頭、濃一字眉、招牌露齒笑 */
+    head=`<path d="M27 58 C27 34 42 26 60 26 C78 26 93 34 93 58 L92 76 C90 92 78 100 60 100 C42 100 30 92 28 76Z" fill="${skin}"/>`;
+    hair1=`<path d="M25 64 C21 40 30 22 46 15 C58 9 76 9 88 18 C97 25 99 42 95 64 C93 54 90 46 86 42 C84 34 76 30 64 31 C50 32 40 36 34 44 C30 50 27 56 25 64Z" fill="${hair}"/>
+      <path d="M30 40 C36 18 62 4 86 14 C76 12 58 14 46 24 C40 29 34 34 30 40Z" fill="#2c241e"/>
+      <path d="M40 24 C54 14 74 12 88 20 M44 30 C58 21 76 20 90 28 M50 35 C62 29 78 28 92 36" stroke="#3b3029" stroke-width="2" fill="none" stroke-linecap="round"/>`;
+    hair2=`<path d="M25 64 C25 70 26 74 28 76 L28 62Z M95 64 C95 70 94 74 92 76 L92 62Z" fill="${hair}"/>`;
+    brows=sad?`<path d="M36 54 L52 50 M84 54 L68 50" stroke="${hair}" stroke-width="4.5" stroke-linecap="round"/>`
+             :`<path d="M35 52 Q44 47 53 50 M67 50 Q76 47 85 52" stroke="${hair}" stroke-width="4.5" fill="none" stroke-linecap="round"/>`;
+    eyes=happy?`<path d="M38 64 q6 -6 12 0 M70 64 q6 -6 12 0" stroke="${hair}" stroke-width="3.4" fill="none" stroke-linecap="round"/>`
+      :`<g class="eyes"><ellipse cx="44" cy="63" rx="4.2" ry="5" fill="${hair}"/><ellipse cx="76" cy="63" rx="4.2" ry="5" fill="${hair}"/>
+        <circle cx="45.6" cy="61.4" r="1.5" fill="#fff"/><circle cx="77.6" cy="61.4" r="1.5" fill="#fff"/></g>
+        <path d="M38 58 q6 -3 12 0 M70 58 q6 -3 12 0" stroke="${hair}" stroke-width="1.6" fill="none"/>`;
+    mouth=sad?`<path d="M50 85 q10 -6 20 0" stroke="#5a2a1a" stroke-width="3" fill="none" stroke-linecap="round"/>`
+      :`<path d="M45 78 Q60 96 75 78 Z" fill="#7a2418"/><path d="M47 79 Q60 83 73 79 L72 82 Q60 86 48 82Z" fill="#fff"/>`;
+    extra=`<path d="M58 68 q-2 6 2 7" stroke="${skinS}" stroke-width="2" fill="none" stroke-linecap="round"/>`;
+  }else{
+    /* 圓臉、方框黑眼鏡、蓬鬆短髮帶瀏海、山羊鬍 */
+    head=`<ellipse cx="60" cy="64" rx="34" ry="37" fill="${skin}"/>`;
+    hair1=`<path d="M25 66 C20 38 34 18 56 16 C80 14 99 30 95 66 C93 56 90 50 86 46 C80 50 70 48 64 44 C58 50 46 50 38 46 C32 52 28 58 25 66Z" fill="${hair}"/>
+      <path d="M36 46 l4 -10 l5 9 l5 -11 l5 10 l6 -11 l5 11 l6 -10 l5 9 l5 -8 l3 9" stroke="${hair}" stroke-width="6" fill="none" stroke-linejoin="round"/>
+      <path d="M40 24 q10 -6 22 -4 M66 20 q12 0 20 8" stroke="#3b3029" stroke-width="2" fill="none" stroke-linecap="round"/>`;
+    hair2=`<path d="M25 66 C25 72 26 76 28 78 L27 62Z M95 66 C95 72 94 76 92 78 L93 62Z" fill="${hair}"/>`;
+    brows=sad?`<path d="M37 53 L51 49 M83 53 L69 49" stroke="${hair}" stroke-width="3.4" stroke-linecap="round"/>`
+             :`<path d="M37 51 q7 -4 14 -1 M69 50 q7 -3 14 1" stroke="${hair}" stroke-width="3.4" fill="none" stroke-linecap="round"/>`;
+    eyes=(happy?`<path d="M40 66 q5 -5 10 0 M70 66 q5 -5 10 0" stroke="${hair}" stroke-width="3" fill="none" stroke-linecap="round"/>`
+      :`<g class="eyes"><ellipse cx="45" cy="65" rx="3.3" ry="4" fill="${hair}"/><ellipse cx="75" cy="65" rx="3.3" ry="4" fill="${hair}"/>
+        <circle cx="46.2" cy="63.7" r="1.2" fill="#fff"/><circle cx="76.2" cy="63.7" r="1.2" fill="#fff"/></g>`)+
+      `<rect x="33" y="56" width="24" height="18" rx="3" fill="#ffffff26" stroke="#111" stroke-width="3.4"/>
+       <rect x="63" y="56" width="24" height="18" rx="3" fill="#ffffff26" stroke="#111" stroke-width="3.4"/>
+       <path d="M57 62 q3 -3 6 0 M33 61 L26 59 M87 61 L94 59" stroke="#111" stroke-width="3" fill="none"/>`;
+    mouth=(sad?`<path d="M52 87 q8 -5 16 0" stroke="#5a2a1a" stroke-width="3" fill="none" stroke-linecap="round"/>`
+      :happy?`<path d="M50 83 Q60 94 70 83 Z" fill="#7a2418"/>`
+      :`<path d="M51 84 q9 6 18 0" stroke="#5a2a1a" stroke-width="3" fill="none" stroke-linecap="round"/>`);
+    extra=`<path d="M48 80 Q54 77 60 79 Q66 77 72 80 Q66 80 60 81 Q54 80 48 80Z" fill="${hair}" opacity=".85"/>
+      <path d="M53 90 Q60 103 67 90 Q64 95 60 95 Q56 95 53 90Z" fill="${hair}" opacity=".85"/>
+      <path d="M58 70 q-2 5 2 6" stroke="${skinS}" stroke-width="2" fill="none" stroke-linecap="round"/>`;
+  }
+  return `<svg viewBox="0 0 120 150" role="img" aria-label="${c.name} Q版公仔">
+  <ellipse cx="60" cy="146" rx="30" ry="4" fill="#0002"/>
+  <path d="M30 150 C30 118 40 105 60 105 C80 105 90 118 90 150Z" fill="${suit}"/>
+  <path d="M49 105 L60 126 L71 105Z" fill="#fff"/>
+  <path d="M49 105 L56 128 L46 120 L42 108Z M71 105 L64 128 L74 120 L78 108Z" fill="${suit}" stroke="#0003" stroke-width="1"/>
+  <path d="M57 109 L63 109 L65 133 L60 139 L55 133Z" fill="${c.tie}"/><path d="M56.5 106 h7 l-1 4 h-5Z" fill="${c.tie}"/>
+  <path d="M37 124 q-10 6 -8 18" stroke="${suit}" stroke-width="11" fill="none" stroke-linecap="round"/>
+  <circle cx="29" cy="142" r="5.5" fill="${skin}"/>
+  ${happy?`<path d="M83 122 q14 -10 12 -30" stroke="${suit}" stroke-width="11" fill="none" stroke-linecap="round"/><circle cx="95" cy="88" r="6" fill="${skin}"/><path d="M95 82 v-7" stroke="${skin}" stroke-width="5" stroke-linecap="round"/>`
+    :`<g class="arm"><path d="M83 124 q12 -6 14 -22" stroke="${suit}" stroke-width="11" fill="none" stroke-linecap="round"/><circle cx="97" cy="99" r="6" fill="${skin}"/></g>`}
+  ${neck}<g class="head">${head}
+  <ellipse cx="26" cy="66" rx="5" ry="7.5" fill="${skin}"/><ellipse cx="94" cy="66" rx="5" ry="7.5" fill="${skin}"/>
+  ${hair1}${hair2}${brows}${eyes}
+  <ellipse cx="36" cy="79" rx="5" ry="3" fill="#f0957e" opacity=".55"/><ellipse cx="84" cy="79" rx="5" ry="3" fill="#f0957e" opacity=".55"/>
+  ${extra}${mouth}</g></svg>`;
+}
+
+/* ---------- questions: 5 each, alternating; facts from reporting as of 2026-10-25 ---------- */
+const Q=[
+ {c:'chiang',q:'我任內跟輝達簽約，把北士科 T17、T18 交給它蓋總部。地上權權利金大約多少？',
+  o:['12.2 億元','122 億元','1,220 億元'],a:1,
+  e:'2 月 11 日簽約，權利金約 122 億元，地上權 50 年、可再延長最多 20 年。市府說建設投資會超過 400 億元。',s:'數位時代，2026/10/06'},
+ {c:'shen',q:'我提出「青年 AI 使用支持方案」。第一階段，18 到 25 歲學生每個月可以拿到多少 AI 使用補助？',
+  o:['300 元','1,500 元','3,000 元'],a:0,
+  e:'第一階段每月 300 元，由市府直接儲值。第二階段擴大到 45 歲以下、已畢業的青年，兩階段合計約 9 億元。',s:'數位時代，2026/10/06'},
+ {c:'chiang',q:'我推「生生喝鮮乳」。學生要怎麼領到牛奶？',
+  o:['學校冰箱每天發放','用數位學生證到超商兌換','每週宅配到家'],a:1,
+  e:'市府與四大超商合作，學生用數位學生證兌換。有乳糖不耐的學生可以改領豆漿。',s:'聯合報，2026/09/14'},
+ {c:'shen',q:'我想在北士科成立「台北研究院」當市府智庫。我說要仿照哪個城市的研究院？',
+  o:['東京','新加坡','首爾'],a:2,
+  e:'他以首爾研究院為範本，構想延攬 70 到 80 位博士級研究人員，研究都市規劃、交通與 AI。',s:'遠見，2026/09；數位時代，2026/10/06'},
+ {c:'chiang',q:'我推動的捷運建設計畫叫什麼？',
+  o:['環狀全線通','六線齊發','一區一捷運'],a:1,
+  e:'「六線齊發」是同時推進六條捷運路線，他在選戰中常拿來當施政成績。',s:'中央社，2026/09/21；聯合報，2026/09/14'},
+ {c:'shen',q:'我主張成立「家長版 1999」，一個獨立的單一窗口。它涵蓋幾歲兒少的安全與托育問題？',
+  o:['0 到 6 歲','0 到 12 歲','0 到 18 歲'],a:2,
+  e:'涵蓋 0 到 18 歲，並把家庭教育中心的服務下沉到 12 個行政區。',s:'遠見，2026/09'},
+ {c:'chiang',q:'社會住宅推動聯盟問兩位候選人社宅目標。我承諾優先盤點、推動多少戶？',
+  o:['704 戶','7,041 戶','70,410 戶'],a:1,
+  e:'他承諾優先盤點推動 7,041 戶，長期目標 5 萬戶，並提醒中央補助縮減可能造成超過 64 億元的缺口。沈伯洋則承諾持續興建，但沒有提出具體戶數。',s:'聯合報，2026/10/22'},
+ {c:'shen',q:'我提出要整建屋齡 30 年以上、沒有電梯的老房子。大約有多少棟？',
+  o:['超過 8 千棟','超過 8 萬棟','超過 80 萬棟'],a:1,
+  e:'他的「HEART」政見提到超過 8 萬棟 30 年以上、無電梯的建築要更新。',s:'數位時代，2026/10/06'},
+ {c:'chiang',q:'我的自駕公車計畫分三階段。第一階段在 2026 年於哪裡試行？',
+  o:['臺北市立動物園','臺北大巨蛋','陽明山國家公園'],a:0,
+  e:'2026 年在動物園試行；2027 年上半年在北士科沙盒測試，下半年 4 輛自駕巴士上北士科與信義公車專用道；2028 年擴大到其他公車專用道。',s:'數位時代，2026/10/06'},
+ {c:'shen',q:'我主張推動「都市微森林」，要成立一筆都市森林維運基金。規模大約多少？',
+  o:['1 億元','10 億元','100 億元'],a:1,
+  e:'約 10 億元，可透過 ESG 引進企業資金。另外主張制定都市林自治條例，並建立公開的樹木健康履歷。',s:'遠見，2026/09'}
+];
+
+/* ---------- audio: works in iOS silent mode via a looping silent <audio> + audioSession ---------- */
+let ac=null,master=null,bgmG=null,sfxG=null,noiseBuf=null,unlockEl=null,muted=false;
+try{muted=localStorage.getItem('tpq_mute')==='1'}catch(e){}
+function silentWav(){const n=4000,b=new ArrayBuffer(44+n),v=new DataView(b);let o=0;
+  const s=t=>{for(const c of t)v.setUint8(o++,c.charCodeAt(0))},u32=x=>{v.setUint32(o,x,true);o+=4},u16=x=>{v.setUint16(o,x,true);o+=2};
+  s('RIFF');u32(36+n);s('WAVE');s('fmt ');u32(16);u16(1);u16(1);u32(8000);u32(8000);u16(1);u16(8);s('data');u32(n);for(let k=0;k<n;k++)v.setUint8(o++,128);
+  return URL.createObjectURL(new Blob([b],{type:'audio/wav'}))}
+function initAudio(){
+  try{if(navigator.audioSession)navigator.audioSession.type='playback'}catch(e){}
+  try{if(!unlockEl){unlockEl=new Audio(silentWav());unlockEl.loop=true;unlockEl.setAttribute('playsinline','')}unlockEl.play().catch(()=>{})}catch(e){}
+  if(ac){ac.resume&&ac.resume();return}
+  try{ac=new (window.AudioContext||window.webkitAudioContext)();
+    master=ac.createGain();master.gain.value=muted?0:1;master.connect(ac.destination);
+    bgmG=ac.createGain();bgmG.gain.value=.45;bgmG.connect(master);sfxG=ac.createGain();sfxG.connect(master);
+    noiseBuf=ac.createBuffer(1,ac.sampleRate*.4,ac.sampleRate);const d=noiseBuf.getChannelData(0);for(let k=0;k<d.length;k++)d[k]=Math.random()*2-1;
+  }catch(e){ac=null}
+}
+function tone(f,d,type='triangle',v=.08,at=0,dest,slide=0){if(!ac)return;const t=at>10?at:ac.currentTime+at,o=ac.createOscillator(),g=ac.createGain();
+  o.type=type;o.frequency.setValueAtTime(f,t);if(slide)o.frequency.exponentialRampToValueAtTime(slide,t+d);
+  g.gain.setValueAtTime(v,t);g.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(g).connect(dest||sfxG);o.start(t);o.stop(t+d+.02)}
+function noise(d,v=.2,freq=1000,at=0,dest,type='bandpass'){if(!ac)return;const t=at>10?at:ac.currentTime+at,s=ac.createBufferSource(),f=ac.createBiquadFilter(),g=ac.createGain();
+  s.buffer=noiseBuf;f.type=type;f.frequency.value=freq;g.gain.setValueAtTime(v,t);g.gain.exponentialRampToValueAtTime(.0001,t+d);s.connect(f).connect(g).connect(dest||sfxG);s.start(t);s.stop(t+d+.02)}
+const mtof=m=>440*Math.pow(2,(m-69)/12);
+const arp=(ms,step,type='square',v=.06,dur=.16)=>ms.forEach((m,k)=>tone(mtof(m),dur,type,v,k*step));
+const sfx={
+  stamp(){noise(.08,.55,700);tone(110,.14,'square',.12,0,null,45)},
+  ok(){arp([72,76,79,84],.07,'square',.06)},
+  no(){tone(330,.18,'sawtooth',.06,0,null,220);tone(247,.3,'sawtooth',.06,.16,null,150)},
+  click(){tone(1200,.03,'square',.03)},
+  next(){noise(.12,.15,3000,0,null,'highpass');tone(500,.08,'triangle',.05,0,null,900)},
+  streak(){arp([79,83,86,91],.05,'square',.05,.1)},
+  fanfare(){arp([60,64,67,72,67,72,76,79,84],.11,'square',.06,.22);arp([48,52,55,60,55,60,64,67,72],.11,'triangle',.06,.22)},
+  meh(){arp([67,64,60,62],.18,'triangle',.06,.25)},
+  tick(){tone(1500,.025,'square',.025)}
+};
+/* candidate "voice": blips per character, deeper vs brighter but same style for both */
+const VOICE={chiang:[300,'triangle'],shen:[360,'square']};
+let typing=null;
+function babble(id){if(!ac)return;const[b,t]=VOICE[id];tone(b*(0.85+Math.random()*.4),.05,t,.03)}
+/* BGM: bright, neutral chiptune loop in C */
+const BASS=[48,0,55,0,45,0,52,0,41,0,48,0,43,0,50,0];
+const MEL=[72,0,76,79,0,77,76,74,72,0,69,72,0,74,76,0];
+const MEL2=[76,0,79,81,0,79,77,76,74,0,77,76,0,74,72,0];
+let seq=null,stp=0,nt=0,bar=0,bpm=118;
+function bgmStart(){if(!ac||seq)return;stp=0;bar=0;nt=ac.currentTime+.05;
+  seq=setInterval(()=>{const dt=60/bpm/4;
+    while(nt<ac.currentTime+.12){const b=BASS[stp],m=(bar%2?MEL2:MEL)[stp];
+      if(b)tone(mtof(b),dt*1.8,'triangle',.08,nt,bgmG);
+      if(m)tone(mtof(m),dt*1.2,'square',.028,nt,bgmG);
+      if(stp%4===0)tone(120,.08,'sine',.12,nt,bgmG,40);
+      if(stp%4===2)noise(.05,.06,2500,nt,bgmG);
+      if(stp%2===1)noise(.02,.03,8000,nt,bgmG,'highpass');
+      nt+=dt;stp=(stp+1)%16;if(!stp)bar++}},25)}
+function bgmStop(){clearInterval(seq);seq=null}
+const ICON_ON='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11"/></svg>';
+const ICON_OFF='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path d="M17 9l5 6M22 9l-5 6"/></svg>';
+const muteBtn=document.createElement('button');muteBtn.className='mute';muteBtn.id='muteBtn';muteBtn.setAttribute('aria-label','聲音開關');document.body.appendChild(muteBtn);
+function setMute(m){muted=m;try{localStorage.setItem('tpq_mute',m?'1':'0')}catch(e){}if(master)master.gain.setTargetAtTime(m?0:1,ac.currentTime,.02);
+  muteBtn.innerHTML=m?ICON_OFF:ICON_ON;muteBtn.setAttribute('aria-pressed',m?'true':'false')}
+muteBtn.onclick=()=>{initAudio();setMute(!muted);if(!muted)bgmStart()};setMute(muted);
+
+/* ---------- visual fx ---------- */
+const fxl=document.createElement('div');fxl.className='fxl';document.body.appendChild(fxl);
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function confetti(n=60){if(reduce)return;const cols=['#d2352b','#2457b5','#1d8a4e','#f2b632','#ffffff','#9b59d0'];
+  for(let k=0;k<n;k++){const e=document.createElement('i');e.className='cf';e.style.left=Math.random()*100+'vw';e.style.background=cols[k%cols.length];
+    e.style.setProperty('--x',(Math.random()*160-80)+'px');e.style.setProperty('--r',(Math.random()*900-450)+'deg');e.style.setProperty('--d',(1.4+Math.random()*1.4)+'s');
+    e.style.animationDelay=(Math.random()*.25)+'s';fxl.appendChild(e);setTimeout(()=>e.remove(),3200)}}
+function inkSplash(el){if(reduce)return;const r=el.getBoundingClientRect(),x=r.left+r.width/2,y=r.top+r.height/2;
+  for(let k=0;k<10;k++){const e=document.createElement('i');e.className='ink';const a=Math.random()*Math.PI*2,d=18+Math.random()*26;
+    e.style.left=x+'px';e.style.top=y+'px';e.style.setProperty('--dx',Math.cos(a)*d+'px');e.style.setProperty('--dy',Math.sin(a)*d+'px');fxl.appendChild(e);setTimeout(()=>e.remove(),500)}}
+function buzz(p){try{navigator.vibrate&&navigator.vibrate(p)}catch(e){}}
+function flash(cls){const b=app.querySelector('.ballot');if(!b)return;b.classList.remove(cls);void b.offsetWidth;b.classList.add(cls)}
+
+/* ---------- state & views ---------- */
+const app=document.getElementById('app');
+let i=0,ans=[];
+const esc=s=>s.replace(/[&<>]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]));
+
+function intro(){
+  app.innerHTML=`
+  <div class="top"><h1>台北市長政見大考驗</h1><span class="meta">2026/11/28 投票</span></div>
+  <section class="ballot">
+    <div class="duo">
+      ${['chiang','shen'].map(k=>`<div class="c"><div class="hi">${k==='chiang'?'考考你！':'準備好了嗎？'}</div><div class="fig walk intro">${chibi(k)}</div><b style="color:${C[k].color}">${C[k].name}</b><small>${C[k].party}・${C[k].role}</small></div>`).join('')}
+    </div>
+    <div class="vs">十 題 政 見 ・ 一 人 五 題</div>
+    <p class="hero">兩位候選人各自提了什麼政見？你知道多少？</p>
+    <p class="lead">每題由一位候選人出題，選 A、B、C 蓋章。答完會告訴你對誰的政見比較熟。</p>
+    <button class="btn" id="go">開始作答</button>
+    <p class="note">題目整理自 2026 年 9 至 10 月新聞報導，政見內容以候選人官方發布為準。本測驗為非官方作品，不代表任何候選人或政黨，也不推薦投票對象。本次選舉共有 6 位候選人登記，本測驗只收錄民調前兩名。</p>
+  </section>`;
+  document.getElementById('go').onclick=()=>{initAudio();bgmStart();sfx.next();i=0;ans=[];question()};
+}
+
+function progressBar(){
+  return `<div class="progress">${Q.map((_,k)=>`<i class="${k<ans.length?(ans[k]?'ok':'no'):k===i?'cur':''}"></i>`).join('')}</div>`;
+}
+
+function question(){
+  const q=Q[i],c=C[q.c];
+  app.innerHTML=`
+  <div class="top"><h1>台北市長政見大考驗</h1><span class="meta">${i+1} / ${Q.length}</span></div>
+  ${progressBar()}
+  <section class="ballot">
+    <div class="speaker">
+      <div class="fig" id="fig">${chibi(q.c)}</div>
+      <div class="say"><div class="who"><span class="dot" style="background:${c.color}"></span>${c.name}出題</div><p>${c.party}・${c.role}</p></div>
+    </div>
+    <p class="q" id="qt" aria-label="${esc(q.q)}"></p>
+    <div class="opts" id="opts" hidden>${q.o.map((t,k)=>`<button class="opt" id="opt${k}" data-k="${k}"><span class="k">${'ABC'[k]}</span><span class="t">${esc(t)}</span><span class="box"></span></button>`).join('')}</div>
+    <div id="exp"></div>
+  </section>`;
+  app.querySelectorAll('.opt').forEach(b=>b.onclick=()=>choose(+b.dataset.k));
+  /* typewriter with candidate voice; tap the question to skip */
+  const qt=document.getElementById('qt'),chars=[...q.q],showOpts=()=>{clearInterval(typing);qt.textContent=q.q;document.getElementById('opts').hidden=false};
+  if(reduce){showOpts();return}
+  let n=0;clearInterval(typing);
+  typing=setInterval(()=>{n++;qt.innerHTML=esc(chars.slice(0,n).join(''))+'<span class="cur"></span>';if(n%2)babble(q.c);if(n>=chars.length)showOpts()},38);
+  qt.onclick=showOpts;
+}
+
+function choose(k){
+  const q=Q[i],ok=k===q.a;ans.push(ok);
+  app.querySelectorAll('.opt').forEach(b=>b.disabled=true);
+  const picked=document.getElementById('opt'+k),right=document.getElementById('opt'+q.a);
+  picked.querySelector('.box').innerHTML='<span class="seal">選</span>';sfx.stamp();buzz(20);
+  setTimeout(()=>inkSplash(picked.querySelector('.box')),60);
+  setTimeout(()=>{
+    right.classList.add('right');right.querySelector('.box').insertAdjacentHTML('beforeend','<span class="mark">正解</span>');
+    if(!ok)picked.classList.add('wrong');
+    let st=0;for(let j=ans.length-1;j>=0&&ans[j];j--)st++;
+    if(ok){sfx.ok();flash('glow');confetti(st>=3?70:28);
+      if(st>=3){setTimeout(sfx.streak,280);app.querySelector('.ballot').insertAdjacentHTML('afterbegin',`<span class="streak">連對 ${st} 題</span>`)}}
+    else{sfx.no();flash('shake');buzz([30,40,30])}
+    const fig=document.getElementById('fig');fig.innerHTML=chibi(q.c,ok?'happy':'sad');fig.className='fig '+(ok?'cheer':'sigh');
+    app.querySelector('.progress').outerHTML=progressBar();
+    document.getElementById('exp').innerHTML=`<div class="explain">
+      <b class="${ok?'ok':'no'}">${ok?'答對了':'答錯了，正解是 '+'ABC'[q.a]}</b>
+      <p>${esc(q.e)}</p><small>資料來源：${q.s}</small></div>
+      <div style="height:12px"></div>
+      <button class="btn" id="next" style="width:100%">${i<Q.length-1?'下一題':'看結果'}</button>`;
+    const n=document.getElementById('next');n.focus({preventScroll:true});
+    n.onclick=()=>{sfx.next();i++;i<Q.length?question():result();window.scrollTo({top:0})};
+  },260);
+}
+
+function result(){
+  const tot=ans.filter(Boolean).length;
+  const per=k=>Q.reduce((s,q,j)=>s+(q.c===k&&ans[j]?1:0),0);
+  const a=per('chiang'),b=per('shen');
+  const title=tot===10?'市政達人':tot>=8?'政見通':tot>=5?'有在關心':tot>=3?'略知一二':'選前惡補一下';
+  const lean=a===b?'兩位的政見你都一樣熟。':a>b?`你對${C.chiang.name}的政見比較熟。`:`你對${C.shen.name}的政見比較熟。`;
+  const share=`我在《台北市長政見大考驗》答對 ${tot}/10 題（${C.chiang.name} ${a}/5、${C.shen.name} ${b}/5）。你了解兩位候選人的政見嗎？11/28 記得去投票。`;
+  app.innerHTML=`
+  <div class="top"><h1>台北市長政見大考驗</h1><span class="meta">結果</span></div>
+  ${progressBar()}
+  <section class="ballot">
+    <p class="score"><b id="cnt">0</b><span> / 10</span></p>
+    <p class="hero title-pop">${title}</p>
+    <p class="lead">${lean}這只代表你對政見的熟悉程度，跟支持誰沒有關係。</p>
+    <div class="split">
+      ${[['chiang',a],['shen',b]].map(([k,n])=>`<div class="r"><span>${C[k].name}</span><span class="bar"><i style="width:${n*20}%;background:${C[k].color}"></i></span><span class="n">${n}/5</span></div>`).join('')}
+    </div>
+    <div class="duo">${['chiang','shen'].map(k=>`<div class="c"><div class="fig walk">${chibi(k,'happy')}</div></div>`).join('')}</div>
+    <div class="row"><button class="btn ghost" id="copy">複製成績</button><button class="btn" id="again">再玩一次</button></div>
+    <p class="note" id="shareText" hidden></p>
+    <p class="note">2026 年九合一選舉投票日為 11 月 28 日。完整政見請看候選人官方資料與中選會選舉公報。</p>
+    <ul class="src">
+      <li><a href="https://www.bnext.com.tw/article/92509/taipei-mayor-2026-shen-chiang-tech-policy" target="_blank" rel="noopener">數位時代：沈伯洋、蔣萬安政見比較</a></li>
+      <li><a href="https://city.gvm.com.tw/article/133307" target="_blank" rel="noopener">遠見：沈伯洋市政構想</a></li>
+      <li><a href="https://udn.com/news/story/6656/9752900" target="_blank" rel="noopener">聯合報：蔣萬安回應三大政績</a></li>
+      <li><a href="https://udn.com/news/story/124652/9831092" target="_blank" rel="noopener">聯合報：住盟社宅承諾評比</a></li>
+      <li><a href="https://www.cna.com.tw/news/aipl/202609215003.aspx" target="_blank" rel="noopener">中央社：台北市選戰</a></li>
+    </ul>
+  </section>`;
+  const cnt=document.getElementById('cnt');let c0=0;
+  const ct=setInterval(()=>{if(c0>=tot){clearInterval(ct);tot>=8?(sfx.fanfare(),confetti(140)):tot>=5?(sfx.ok(),confetti(50)):sfx.meh();return}c0++;cnt.textContent=c0;sfx.tick()},110);
+  document.getElementById('again').onclick=()=>{sfx.next();i=0;ans=[];question();window.scrollTo({top:0})};
+  document.getElementById('copy').onclick=()=>{
+    const el=document.getElementById('shareText'),btn=document.getElementById('copy');
+    const fb=()=>{el.hidden=false;el.textContent=share;const r=document.createRange();r.selectNodeContents(el);const s=getSelection();s.removeAllRanges();s.addRange(r);btn.textContent='請長按複製'};
+    try{navigator.clipboard.writeText(share).then(()=>btn.textContent='已複製',fb)}catch(e){fb()}
+  };
+}
+intro();
+})();
+</script>
+</body>
+</html>
