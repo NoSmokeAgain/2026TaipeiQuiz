@@ -7,6 +7,9 @@
 <meta property="og:title" content="台北市長政見大考驗">
 <meta property="og:description" content="蔣萬安、沈伯洋各五題政見問答。你答得出幾題？11/28 投票前測一下。">
 <meta property="og:type" content="website">
+<meta property="og:url" content="https://nosmokeagain.github.io/2026TaipeiQuiz/">
+<meta property="og:image" content="https://nosmokeagain.github.io/2026TaipeiQuiz/og.png">
+<meta name="twitter:card" content="summary_large_image">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);box-sizing:border-box}body{margin:0;font-size:14px}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>台北市長政見大考驗</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -402,7 +405,7 @@ function result(){
   const a=per('chiang'),b=per('shen');
   const title=tot===10?'市政達人':tot>=8?'政見通':tot>=5?'有在關心':tot>=3?'略知一二':'選前惡補一下';
   const lean=a===b?'兩位的政見你都一樣熟。':a>b?`你對${C.chiang.name}的政見比較熟。`:`你對${C.shen.name}的政見比較熟。`;
-  const share=`我在《台北市長政見大考驗》答對 ${tot}/10 題（${C.chiang.name} ${a}/5、${C.shen.name} ${b}/5）。你了解兩位候選人的政見嗎？11/28 記得去投票。`;
+  const share=`我在《台北市長政見大考驗》答對 ${tot}/10 題（${C.chiang.name} ${a}/5、${C.shen.name} ${b}/5）。你了解兩位候選人的政見嗎？11/28 記得去投票。\nhttps://nosmokeagain.github.io/2026TaipeiQuiz/`;
   app.innerHTML=`
   <div class="top"><h1>台北市長政見大考驗</h1><span class="meta">結果</span></div>
   ${progressBar()}
